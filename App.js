@@ -1,33 +1,19 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { getDecks } from './utils/api'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
+import { Provider } from 'react-redux'
+import reducer from './reducers'
+import Dashboard from './components/Dashboard'
 
 export default class App extends Component {
-  state = {
-    data: ''
-  }
-  componentDidMount() {
-    getDecks().then(result => {
-      this.setState(() => ({
-        data: result
-      }))
-    })
-  }
   render() {
-    const data = this.state
     return (
-      <View style={styles.container}>
-        <Text>{JSON.stringify(data)}</Text>
-      </View>
+      <Provider store={createStore(reducer, applyMiddleware(thunk))}>
+        <View style={{ flex: 1 }} >
+          <Dashboard />
+        </View>
+      </Provider>
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

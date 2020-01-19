@@ -1,12 +1,7 @@
-// Use AsyncStorage Database
-// methods:
-// getDecks should return all decks with the titles and the questions and answers.
-// getDeck should return a deck identified by an id, and return all deck data asociated, like questions ans answers.
-// saveDeckTitle: should save the title and add it to the deck
-// addCardToDeck shoult save the title and the card, the card should be saved in the questions list of that deck.
-
 import { AsyncStorage } from 'react-native'
-import { decks, DECKS_STORAGE_KEY } from './_DATA'
+import { decks } from './_DATA'
+
+export const DECKS_STORAGE_KEY = 'MobileFlashCards:decks';
 
 export function getDecks() {
     return AsyncStorage.getItem(DECKS_STORAGE_KEY)
@@ -19,7 +14,7 @@ export function getDecks() {
             }
         })
 }
-
+  
 export function getDeck(title) {
     return getDecks()
         .then((decks) => decks[title]);

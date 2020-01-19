@@ -1,4 +1,4 @@
-import { getDecks } from '../utils/api'
+import { getDecks } from '../utils/api';
 
 export const GET_ALL_DECKS = 'GET_ALL_DECKS'
 export const ADD_NEW_DECK = 'ADD_NEW_DECK'
@@ -23,14 +23,5 @@ export function addNewCard(deckId, cardInfo) {
         type: ADD_NEW_CARD,
         deckId,
         cardInfo
-    }
-}
-
-export function handleInitialData() {
-    return dispatch => {
-        return getDecks()
-            .then(decks => {
-                dispatch(getAllDecks(decks))
-        })
     }
 }

@@ -10,7 +10,13 @@ import AddDeck from './AddDeck'
 import { AppLoading } from 'expo'
 import Constants from 'expo-constants'
 
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
 export class Dashboard extends Component {
+  static navigationOptions = {
+    title: 'Welcome'
+  }
   state = {
     ready: false
   }
@@ -21,7 +27,11 @@ export class Dashboard extends Component {
     .then(decks => dispatch(getAllDecks(decks)))
     .then(() => this.setState(() => ({ ready: true})))
   }
-  _keyExtractor = (item, index) => index;
+  _keyExtractor = (item, index) => `list-item-${index}`;
+
+  navigateToDeckDetails= (deck) => {
+    this.props.navigation.navigate('DeckDetails', {deck})
+  }
   render() {
     const {decks} = this.props
     const { ready } = this.state
@@ -32,7 +42,7 @@ export class Dashboard extends Component {
       <FlatList
         style={styles.container}
         data={Object.values(decks)}
-        renderItem={({item}) => <AddDeck/>}
+        renderItem={({item}) => <Deck title={item.title} navigateToDeckDetails={this.navigateToDeckDetails}/>}
         keyExtractor={this._keyExtractor}
       />
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { connect } from 'react-redux'
 import { gray } from '../utils/colors'
 
@@ -8,10 +8,12 @@ export class Deck extends Component {
     render() {
         const { deck } = this.props
         return (
-            <View style={styles.container}>
-                <Text style={{fontSize: 32, marginTop: 10, marginBottom: 5}}>{deck.title}</Text>
-                <Text style={{color: gray, fontSize: 18}}>{deck.questions.length} cards</Text>
-            </View>
+            <TouchableWithoutFeedback onPress={() => this.props.navigateToDeckDetails(deck.title)}>
+                <View style={styles.container}>
+                    <Text style={{fontSize: 32, marginTop: 10, marginBottom: 5}}>{deck.title}</Text>
+                    <Text style={{color: gray, fontSize: 18}}>{deck.questions.length} cards</Text>
+                </View>
+            </TouchableWithoutFeedback>
         )
     }
 }

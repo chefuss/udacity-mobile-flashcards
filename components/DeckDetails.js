@@ -4,7 +4,9 @@ import { connect } from 'react-redux'
 import { gray, purple, white } from '../utils/colors'
 
 export class DeckDetails extends Component {
-
+    static navigationOptions = {
+        title: 'Deck Details'
+      }
     render() {
         const { deck } = this.props
         return (
@@ -68,10 +70,7 @@ const styles = StyleSheet.create({
     }
 })
 
-function mapStateToProps(state, title) {
-    const deck = state[title.title]
-    return {
-        deck
-    }
+function mapStateToProps(state, ownProps) {
+    return { deck: state[ownProps.navigation.state.params.deck] };
 }
 export default connect(mapStateToProps)(DeckDetails)

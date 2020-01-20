@@ -6,6 +6,9 @@ import { addCardToDeck } from '../utils/api'
 import { connect } from 'react-redux'
 
 export class AddCard extends Component {
+    static navigationOptions = {
+        title: 'Add Card'
+      }
     state = {
         question: '',
         answer: ''

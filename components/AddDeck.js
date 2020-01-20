@@ -21,8 +21,9 @@ export class AddDeck extends Component {
         this.setState({
             deckTitle: ''
         })
-        //return to home.
-        this.props.navigation.navigate('Home')
+        
+        //return to deck.
+        this.props.navigation.navigate('DeckDetails', {deck: deckTitle})
     }
     render() {
         return (

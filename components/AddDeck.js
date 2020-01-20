@@ -15,16 +15,20 @@ export class AddDeck extends Component {
         })
     }
     onPressButton = () => {
-        const { deckTitle} = this.state
-        this.props.createNewDeck(deckId, title)
-        saveDeckTitle(deckId, title)
+        const { deckTitle } = this.state
+        this.props.createNewDeck(deckTitle)
+        saveDeckTitle(deckTitle)
         this.setState({
             deckTitle: ''
         })
+        //return to home.
+        this.props.navigation.navigate('Home')
+        
+        
     }
     render() {
         return (
-            <KeyboardAvoidingView behavior='padding'>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <Text style={styles.heading}>Add a new deck</Text>
                 <TextInput
                     onChangeText={this.handleAddTitle}
@@ -77,7 +81,7 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = dispatch => ({
-    createNewDeck: (deckId, title) => 
-        dispatch(addNewDeck(deckId, title))
+    createNewDeck: (title) => 
+        dispatch(addNewDeck(title))
 })
 export default connect(null, mapDispatchToProps)(AddDeck)

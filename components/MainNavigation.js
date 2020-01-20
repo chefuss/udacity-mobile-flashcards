@@ -3,6 +3,7 @@ import {createStackNavigator} from 'react-navigation-stack'
 import Dashboard from './Dashboard'
 import DeckDetails from './DeckDetails'
 import AddCard from './AddCard'
+import AddDeck from './AddDeck'
 
 const MainNavigation = createStackNavigator({
     Home: {
@@ -16,6 +17,9 @@ const MainNavigation = createStackNavigator({
     },
     DeckDetails: {
         screen: DeckDetails
+    },
+    AddDeck: {
+        screen: AddDeck
     }
 },{
     initialRouteName: 'Home'

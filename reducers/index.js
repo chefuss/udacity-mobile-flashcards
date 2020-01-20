@@ -8,7 +8,7 @@ export default function decks(state = {}, action) {
                 ...action.decks
             }
         case ADD_NEW_DECK:
-            const title = action
+            const title = action.title
             return {
                 ...state,
                 [title]: {
@@ -19,7 +19,6 @@ export default function decks(state = {}, action) {
         case ADD_NEW_CARD:
             const { deckId, cardInfo } = action
             const deck = deckId.title
-            console.log(action)
             return {
                 ...state,
                 [deck]: {

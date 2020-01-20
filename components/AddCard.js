@@ -38,7 +38,7 @@ export class AddCard extends Component {
     }
     render() {
         return (
-            <KeyboardAvoidingView behavior='padding'>
+            <KeyboardAvoidingView behavior='padding' style={styles.container}>
                 <Text style={styles.heading}>Add a new card to your mobileFlashCards!</Text>
                 <TextInput
                     onChangeText={this.handleAddQuestion}

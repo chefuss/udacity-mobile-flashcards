@@ -23,8 +23,6 @@ export class AddDeck extends Component {
         })
         //return to home.
         this.props.navigation.navigate('Home')
-        
-        
     }
     render() {
         return (

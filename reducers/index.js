@@ -18,11 +18,13 @@ export default function decks(state = {}, action) {
             }
         case ADD_NEW_CARD:
             const { deckId, cardInfo } = action
+            const deck = deckId.title
+            console.log(action)
             return {
                 ...state,
-                [deckId]: {
-                    ...state[deckId],
-                    questions: [...state[deckId].questions].concat(cardInfo)
+                [deck]: {
+                    ...state[deck],
+                    questions: [...state[deck].questions].concat(cardInfo)
                 }
             }
     }

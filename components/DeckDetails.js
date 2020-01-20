@@ -21,7 +21,7 @@ export class DeckDetails extends Component {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.secondaryBtn} onPress={()=> console.log('add a card')}>
+                    <TouchableOpacity style={styles.secondaryBtn} onPress={()=> this.props.navigation.navigate('AddCard', {deck})}>
                         <Text style={styles.secondaryText}>Add a card</Text>
                     </TouchableOpacity>
                 </View>

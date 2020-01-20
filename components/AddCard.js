@@ -25,12 +25,16 @@ export class AddCard extends Component {
     }
     onPressButton = () => {
         const { question, answer } = this.state
-        this.props.createNewCard(deckId, question, answer)
+
+        const deckId = this.props.navigation.state.params.deck
+        this.props.createNewCard(deckId, {question, answer})
         addCardToDeck(deckId, {question, answer})
         this.setState({
             question: '',
             answer: ''
         })
+        //return to deck.
+        this.props.navigation.navigate('DeckDetails', deckId)
     }
     render() {
         return (

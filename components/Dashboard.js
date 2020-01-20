@@ -5,6 +5,7 @@ import { getAllDecks } from '../actions'
 import { getDecks } from '../utils/api'
 import Deck from './Deck'
 import DeckDetails from './DeckDetails'
+import AddCards from './AddCard'
 import { AppLoading } from 'expo'
 import Constants from 'expo-constants'
 
@@ -30,7 +31,7 @@ export class Dashboard extends Component {
       <FlatList
         style={styles.container}
         data={Object.values(decks)}
-        renderItem={({item}) => <DeckDetails title={item.title} />}
+        renderItem={({item}) => <AddCards/>}
         keyExtractor={this._keyExtractor}
       />
     )

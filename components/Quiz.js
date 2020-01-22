@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { gray, purple, white, dark, light, green, red } from '../utils/colors'
-import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
+import { gray, white, dark, light, green, red } from '../utils/colors'
 import Constants from 'expo-constants'
 
 export class Quiz extends Component {
@@ -44,8 +43,6 @@ export class Quiz extends Component {
             showingQuestion: true,
             total: 0
         });
-        clearLocalNotification()
-            .then(setLocalNotification)
     }
 
     render() {

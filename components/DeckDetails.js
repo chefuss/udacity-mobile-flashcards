@@ -3,10 +3,19 @@ import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-nati
 import { connect } from 'react-redux'
 import { gray, light, dark } from '../utils/colors'
 import Constants from 'expo-constants'
+import { clearLocalNotifications, setLocalNotification } from '../utils/notifications'
 
 export class DeckDetails extends Component {
     static navigationOptions = {
         title: 'Deck Details'
+    }
+    handleStartQuiz = () => {
+        const deck = this.props.deck
+
+        clearLocalNotifications()
+        .then(setLocalNotification)
+        .then(this.props.navigation.navigate('Quiz', {deck}))
+        
     }
     render() {
         const { deck } = this.props
@@ -17,7 +26,7 @@ export class DeckDetails extends Component {
                     <Text style={{color: gray, fontSize: 18, textAlign: 'center'}}>{deck.questions.length} cards</Text>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.primaryBtn} onPress={()=> this.props.navigation.navigate('Quiz', {deck})}>
+                    <TouchableOpacity style={styles.primaryBtn} onPress={this.handleStartQuiz}>
                         <Text style={styles.btnText}>Take a Quiz</Text>
                     </TouchableOpacity>
                 </View>

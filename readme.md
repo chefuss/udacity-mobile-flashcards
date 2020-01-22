@@ -20,6 +20,8 @@ In order to run the app you need to have installed:
 3. npm
 
 run
-```yarn install```
-```yarn start```
+```yarn install
+```
+```yarn start
+```
 

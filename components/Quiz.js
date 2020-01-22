@@ -45,8 +45,6 @@ export class Quiz extends Component {
         const { deck } = this.props
         const questions = deck.questions;
         const question = questions[this.state.currentQuestion]
-        console.log(this.state.total)
-        console.log((this.state.total === questions.length))
         if (questions.length === 0 ) {
             return (
                 <View style={styles.container}>

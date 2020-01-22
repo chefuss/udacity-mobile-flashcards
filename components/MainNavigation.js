@@ -6,6 +6,7 @@ import Deck from './Deck'
 import AddCard from './AddCard'
 import AddDeck from './AddDeck'
 import Quiz from './Quiz'
+import { dark, light } from '../utils/colors'
 
 const MainNavigation = createStackNavigator({
     Home: {
@@ -27,7 +28,16 @@ const MainNavigation = createStackNavigator({
         screen: Quiz
     }
 },{
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    defaultNavigationOptions: {
+        headerStyle: {
+            backgroundColor: dark,
+            height: 80
+        },
+        headerTintColor: light,
+        headerTitleStyle: 'bold',
+        headerBackTitle: 'back'
+    }
 })
 
 

@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { gray, purple, white } from '../utils/colors'
+import { gray, purple, white, dark, light, green, red } from '../utils/colors'
 import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
+import Constants from 'expo-constants'
 
 export class Quiz extends Component {
+    static navigationOptions = {
+        title: 'Quiz'
+      }
     state =  {
         currentQuestion: 0,
         corrects: 0,
@@ -51,10 +55,12 @@ export class Quiz extends Component {
         if (questions.length === 0 ) {
             return (
                 <View style={styles.container}>
-                    <Text style={styles.heading}>There are no cards for this Deck</Text>
-                    <TouchableOpacity onPress={() => this.props.navigation.navigate('AddCard', {deck})}>
-                        <Text>Add Card to deck</Text>
-                    </TouchableOpacity>
+                    <View style={styles.section}>
+                        <Text style={styles.heading}>There are no cards for this Deck</Text>
+                        <TouchableOpacity style={{marginTop: 20}} onPress={() => this.props.navigation.navigate('AddCard', {deck})}>
+                            <Text style={{textAlign: 'center', fontSize: 18, color: dark}}>Add Card to deck</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             )
         }
@@ -64,15 +70,15 @@ export class Quiz extends Component {
                 <View style={styles.container}>
                     <Text style={styles.heading}>Should show results</Text>
                     <View style={styles.section}>
-                        <Text>Total of correct questions: {corrects}</Text>
-                        <Text>Total of wrong questions: {wrong}</Text>
+                        <Text style={{textAlign: 'center', fontSize: 18, marginBottom: 10, color: dark}}>Total of correct questions: {corrects}</Text>
+                        <Text style={{textAlign: 'center', fontSize: 18, marginBottom: 10, color: dark}}>Total of wrong questions: {wrong}</Text>
                     </View>
                     <View>
-                        <TouchableOpacity style={styles.correctBtn} onPress={() => this.resetQuiz(this.state)}>
+                        <TouchableOpacity style={[styles.correctBtn, styles.primaryBtn]} onPress={() => this.resetQuiz(this.state)}>
                             <Text style={styles.btnText}>Reset quiz</Text>
                         </TouchableOpacity>
-                        <TouchableOpacity style={styles.correctBtn} onPress={() => this.props.navigation.goBack()}>
-                            <Text style={styles.btnText}>Go back to deck</Text>
+                        <TouchableOpacity style={[styles.correctBtn, styles.secondaryBtn]} onPress={() => this.props.navigation.goBack()}>
+                            <Text style={[styles.btnText, {color: dark}]}>Go back to deck</Text>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -80,24 +86,24 @@ export class Quiz extends Component {
         }
         return (
             <View style={styles.container}>
-                <View style={styles.section}>
+                <View style={{marginBottom: 10}}>
                     <Text style={styles.heading}>{deck.title}</Text>
                     <View>
-                        <Text style={{fontSize: 18, color: gray}}>Card {this.state.currentQuestion + 1} of { questions.length }</Text>
+                        <Text style={{fontSize: 18, color: gray, textAlign: 'center'}}>Card {this.state.currentQuestion + 1} of { questions.length }</Text>
                     </View>
                 </View>
-                <View style={styles.section}>
+                <View>
                     {
                         this.state.showingQuestion === true ?
                         <View style={styles.section}>
-                            <Text style={{fontSize: 18, color: gray}}>Question:</Text>
+                            <Text style={{fontSize: 18, color: gray, marginBottom: 10}}>Question:</Text>
                             <Text style={styles.question}>{question.question}</Text>
                         </View>
                          :
                          <View style={styles.section}>
-                         <Text style={{fontSize: 18, color: gray}}>Answer:</Text>
-                         <Text style={styles.question}>{question.answer}</Text>
-                     </View>
+                            <Text style={{fontSize: 18, color: gray}}>Answer:</Text>
+                            <Text style={styles.question}>{question.answer}</Text>
+                        </View>
                     }
                 </View>
                 <View style={styles.section}>
@@ -113,7 +119,7 @@ export class Quiz extends Component {
                     <TouchableOpacity style={styles.correctBtn} onPress={() => this.handleAnswer(question, 'true')}>
                         <Text style={styles.btnText}>Correct</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.wrongBtn} onPress={() => this.handleAnswer(question, 'false')}>
+                    <TouchableOpacity style={[styles.correctBtn, styles.wrongBtn]} onPress={() => this.handleAnswer(question, 'false')}>
                         <Text style={styles.secondaryText}>Wrong</Text>
                     </TouchableOpacity>
                 </View>
@@ -121,21 +127,27 @@ export class Quiz extends Component {
         )
     }
 }
+
+const { width } = Dimensions.get('window')
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingBottom: 20,
+        paddingTop: Constants.statusBarHeight,
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: light
     },
     section: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
+        textAlign: 'center',
+        padding: 20
     },
     question: {
         fontSize: 32,
-        color: purple
+        color: dark
     },
     heading: {
         fontSize: 32,
@@ -143,26 +155,25 @@ const styles = StyleSheet.create({
         marginBottom:10,
     },
     correctBtn: {
-        backgroundColor: purple,
+        backgroundColor: green,
         padding: 20,
         paddingLeft: 30,
         paddingRight: 30,
         borderRadius: 7,
-        minWidth: 250,
+        width: width - 40,
         marginTop: 10,
         marginBottom: 10 
     },
     wrongBtn: {
-        backgroundColor: white,
-        borderColor: purple,
-        borderWidth: 3,
-        padding: 20,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderRadius: 7,
-        minWidth: 250,
-        marginTop: 10,
-        marginBottom: 10 
+        backgroundColor: red,
+    },
+    primaryBtn: {
+        backgroundColor: dark,
+    },
+    secondaryBtn: {
+        backgroundColor: light,
+        borderWidth: 2,
+        borderColor: dark,
     },
     btnText: {
         color: white,
@@ -170,7 +181,7 @@ const styles = StyleSheet.create({
         fontSize: 21
     },
     secondaryText: {
-        color: purple,
+        color: light,
         textAlign: 'center',
         fontSize: 21
     }

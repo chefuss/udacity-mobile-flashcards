@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
-import { gray, purple, white } from '../utils/colors'
+import { gray, light, dark } from '../utils/colors'
+import Constants from 'expo-constants'
 
 export class DeckDetails extends Component {
     static navigationOptions = {
         title: 'Deck Details'
-      }
+    }
     render() {
         const { deck } = this.props
         return (
             <View style={styles.container}>
-                <View style={styles.container}>
-                    <Text style={{fontSize: 32, marginTop: 10, marginBottom: 5}}>{deck.title}</Text>
-                    <Text style={{color: gray, fontSize: 18}}>{deck.questions.length} cards</Text>
+                <View style={styles.heading}>
+                    <Text style={{fontSize: 32, marginTop: 10, marginBottom: 5, textAlign: 'center'}}>{deck.title}</Text>
+                    <Text style={{color: gray, fontSize: 18, textAlign: 'center'}}>{deck.questions.length} cards</Text>
                 </View>
                 <View>
                     <TouchableOpacity style={styles.primaryBtn} onPress={()=> this.props.navigation.navigate('Quiz', {deck})}>
@@ -21,7 +22,7 @@ export class DeckDetails extends Component {
                     </TouchableOpacity>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.secondaryBtn} onPress={()=> this.props.navigation.navigate('AddCard', {deck})}>
+                    <TouchableOpacity style={[styles.primaryBtn, styles.secondaryBtn]} onPress={()=> this.props.navigation.navigate('AddCard', {deck})}>
                         <Text style={styles.secondaryText}>Add a card</Text>
                     </TouchableOpacity>
                 </View>
@@ -29,42 +30,45 @@ export class DeckDetails extends Component {
         )
     }
 }
+
+const { width } = Dimensions.get('window')
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         alignItems: 'center',
         paddingBottom: 20,
+        paddingTop: Constants.statusBarHeight,
+        paddingLeft: 10,
+        paddingRight: 10,
+        backgroundColor: light
+    },
+    heading: {
+        marginBottom: 20
     },
     primaryBtn: {
-        backgroundColor: purple,
+        backgroundColor: dark,
         padding: 20,
         paddingLeft: 30,
         paddingRight: 30,
         borderRadius: 7,
-        minWidth: 250,
+        width: width - 40,
         marginTop: 10,
         marginBottom: 10 
     },
     secondaryBtn: {
-        backgroundColor: white,
-        borderColor: purple,
+        backgroundColor: light,
+        borderColor: dark,
         borderWidth: 3,
-        padding: 20,
-        paddingLeft: 30,
-        paddingRight: 30,
-        borderRadius: 7,
-        minWidth: 250,
-        marginTop: 10,
-        marginBottom: 10 
     },
     btnText: {
-        color: white,
+        color: light,
         textAlign: 'center',
         fontSize: 21
     },
     secondaryText: {
-        color: purple,
+        color: dark,
         textAlign: 'center',
         fontSize: 21
     }

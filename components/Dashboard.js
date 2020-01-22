@@ -1,18 +1,12 @@
 import React, { Component } from 'react'
-import { SafeAreaView, View, Text, FlatList, StyleSheet, TouchableOpacity } from 'react-native'
+import { SafeAreaView, View, Text, FlatList, StyleSheet, TouchableOpacity, Dimensions } from 'react-native'
 import { connect } from 'react-redux'
 import { getAllDecks } from '../actions'
 import { getDecks } from '../utils/api'
-import { purple, white } from '../utils/colors'
+import { light, dark } from '../utils/colors'
 import Deck from './Deck'
-import DeckDetails from './DeckDetails'
-import AddCards from './AddCard'
-import AddDeck from './AddDeck'
 import { AppLoading } from 'expo'
 import Constants from 'expo-constants'
-
-import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
 
 export class Dashboard extends Component {
   static navigationOptions = {
@@ -43,10 +37,10 @@ export class Dashboard extends Component {
       <SafeAreaView style={styles.container}>
         <FlatList
         data={Object.values(decks)}
-        renderItem={({item}) => <Deck title={item.title} navigateToDeckDetails={this.navigateToDeckDetails}/>}
+        renderItem={({item}) => <Deck style={styles.deck} title={item.title} navigateToDeckDetails={this.navigateToDeckDetails}/>}
         keyExtractor={this._keyExtractor}
         />
-        <View>
+        <View style={{paddingLeft: 10, paddingRight: 10}}>
             <TouchableOpacity style={styles.primaryBtn} onPress={()=> this.props.navigation.navigate('AddDeck')}>
                 <Text style={styles.btnText}>Add a Deck</Text>
             </TouchableOpacity>
@@ -55,24 +49,28 @@ export class Dashboard extends Component {
     )
   }
 }
+
+const { width } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: Constants.statusBarHeight,
-    padding: 10
+    paddingTop: Constants.statusBarHeight,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: light
   },
   primaryBtn: {
-    backgroundColor: purple,
+    backgroundColor: dark,
     padding: 20,
     paddingLeft: 30,
     paddingRight: 30,
     borderRadius: 7,
-    minWidth: 250,
+    width: width - 20,
     marginTop: 10,
-    marginBottom: 10 
+    marginBottom: 10
   },
   btnText: {
-      color: white,
+      color: light,
       textAlign: 'center',
       fontSize: 21
   }

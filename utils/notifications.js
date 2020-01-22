@@ -1,5 +1,4 @@
-import React from 'react'
-import { View, StyleSheet, AsyncStorage } from 'react-native'
+import { AsyncStorage } from 'react-native'
 import { Notifications } from 'expo'
 import * as Permissions from 'expo-permissions';
 

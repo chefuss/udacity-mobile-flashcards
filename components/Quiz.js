@@ -3,16 +3,6 @@ import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } fr
 import { connect } from 'react-redux'
 import { gray, purple, white } from '../utils/colors'
 
-//if user has no cards, show something
-// show result page
-//if flipped
-
-/*
-
-When the score is displayed, buttons are displayed to either start the quiz over or go back to the Individual Deck view.
-Both the 'Restart Quiz' and 'Back to Deck' buttons route correctly to their respective views.
-*/
-
 export class Quiz extends Component {
     state =  {
         currentQuestion: 0,
@@ -41,8 +31,7 @@ export class Quiz extends Component {
             currentQuestion: this.state.currentQuestion + 1,
         })
     }
-    resetQuiz = () => {
-        console.log('here')
+    resetQuiz = (state) => {
         this.setState({
             currentQuestion: 0,
             corrects: 0,
@@ -78,7 +67,7 @@ export class Quiz extends Component {
                         <Text>Total of wrong questions: {wrong}</Text>
                     </View>
                     <View>
-                        <TouchableOpacity style={styles.correctBtn} onPress={() => this.resetQuiz}>
+                        <TouchableOpacity style={styles.correctBtn} onPress={() => this.resetQuiz(this.state)}>
                             <Text style={styles.btnText}>Reset quiz</Text>
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.correctBtn} onPress={() => this.props.navigation.goBack()}>

@@ -16,7 +16,7 @@ export class DeckDetails extends Component {
                     <Text style={{color: gray, fontSize: 18}}>{deck.questions.length} cards</Text>
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.primaryBtn} onPress={()=> console.log('go to quiz')}>
+                    <TouchableOpacity style={styles.primaryBtn} onPress={()=> this.props.navigation.navigate('Quiz', {deck})}>
                         <Text style={styles.btnText}>Take a Quiz</Text>
                     </TouchableOpacity>
                 </View>

@@ -47,7 +47,7 @@ export class AddCard extends Component {
                 </TextInput>
                 <TextInput
                     onChangeText={this.handleAddAnswer}
-                    placeholder={'add your answer here'}
+                    placeholder={'add your answer here: the questions is true or false'}
                     style={styles.input}>
                 </TextInput>
                 <TouchableOpacity style={styles.primaryBtn} onPress={this.onPressButton}>

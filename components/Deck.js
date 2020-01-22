@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state, title) {
     const deck = state[title.title]
-    console.log(deck)
     return {
         deck
     }

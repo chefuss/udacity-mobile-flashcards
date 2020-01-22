@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, StyleSheet, TouchableWithoutFeedback, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { gray, purple, white } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/notifications'
 
 export class Quiz extends Component {
     state =  {
@@ -39,6 +40,8 @@ export class Quiz extends Component {
             showingQuestion: true,
             total: 0
         });
+        clearLocalNotification()
+            .then(setLocalNotification)
     }
 
     render() {

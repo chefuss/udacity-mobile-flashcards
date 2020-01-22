@@ -7,9 +7,13 @@ import reducer from './reducers'
 import MainNavigation from './components/MainNavigation'
 import { AddDeck } from './components/AddDeck';
 import { white } from './utils/colors';
+import { setLocalNotification } from './utils/notifications'
 
 
 export default class App extends Component {
+  componentDidMount() {
+    setLocalNotification()
+  }
   render() {
     return (
       <Provider store={createStore(reducer, applyMiddleware(thunk))}>
